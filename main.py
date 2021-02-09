@@ -12,10 +12,15 @@ def upload_file(f):
     except Exception as e:
         print(e)
 
+#fetches animal list from GitHub, puts two animals together
+def get_wordlist():
+    fetch_words = requests.get("https://gist.githubusercontent.com/mbauer14/eaaa001b7fb8073dd576/raw/84501d87e7ac3a134700862a6b22916c9cb16773/animals.txt")
+    return fetch_words.text.splitlines()
+
+# takes the animals, puts them in an array and chooses one at random.
 def create_name():
-    prefix = ["Fat", "tight"]
-    suffix = ["Cock", "Pussy"]
-    return  random.choice(prefix) + random.choice(suffix) + ".zip"
+    word = ([c.strip() for c in get_wordlist()])
+    return  random.choice(word) + random.choice(word) + ".zip"
 archive_name = create_name()
 
 
