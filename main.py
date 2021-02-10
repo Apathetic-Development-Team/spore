@@ -1,27 +1,19 @@
-import requests
-import zipfile
-import random
+import os
+import archive
+from sys import argv
 
-def create_name():
-    prefix = ["Fat", "tight"]
-    suffix = ["Cock", "Pussy"]
-    return  random.choice(prefix) + random.choice(suffix) + ".zip"
-archive_name = create_name()
+gc = '\033[92m'
+end = '\033[0m'
 
+def main():
+    print(gc + "~*~ Spore ~*~" + end)
+    try:
+        user_input = argv[1]
+        print("User Input: " + user_input)
+        archive.process(user_input)
+    except:
+        print("Usage: main.py yourfile")
+        quit()
 
-def create_archive():
-    archive = zipfile.ZipFile(archive_name, 'w')
-    archive.write('pp')
-    archive.close()
-
-# was going to make a Main Function but indentation gives me motion sickness
-create_archive()
-files = {'file': open(archive_name, 'rb')}
-
-try:
-    upload = requests.post("https://api.bayfiles.com/upload", files=files)
-    print(upload.content)
-
-except:
-    print("File failed to Upload.")
-
+if __name__ == "__main__":
+    main()
