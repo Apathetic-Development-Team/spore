@@ -7,14 +7,12 @@ gui_state = True
 
 
 def is_gui(status):
-    global  gui_state
+    global gui_state
 
     if status:
         gui_state = True
     elif not status:
         gui_state = False
-
-
 
 
 def bayfiles_upload(files):
@@ -36,7 +34,7 @@ def bayfiles_upload(files):
         else:
             print('Something else happened')
     except Exception as e:
-        print(e)
+        print('BayFiles did not upload')
 
 
 def anonfiles_upload(files):
@@ -56,7 +54,7 @@ def anonfiles_upload(files):
                 gui.update_links('AnonFiles: ' + resp['data']['file']['url']['short'])
         else:
             print('Something else happened')
-    except Exception as e:
+    except Exception:
         print('AnonFiles did not upload')
 
 
@@ -91,7 +89,7 @@ def push(archive_name):
             anonfiles_upload(files)
             gofile_upload(files)
             if gui_state:
-                gui.InfoBox("All Files Uploaded.")
+                gui.infobox("All Files Uploaded.")
 
     except Exception as e:
         print("Failed to Upload (all?) files")
