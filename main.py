@@ -1,4 +1,3 @@
-import os
 import archive
 from sys import argv
 import gui
