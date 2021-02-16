@@ -76,7 +76,7 @@ def gofile_upload(files):
         else:
             print('Something else happened')
     except Exception as e:
-        print('GoFiles did not upload')
+        print('GoFile did not upload')
 
 
 def push(archive_name):
