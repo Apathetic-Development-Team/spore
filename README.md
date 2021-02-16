@@ -16,7 +16,9 @@ tkinter is a required library which should come bundled with your Python version
 
 # Usage
 
-> :warning: **GUI will freeze during file upload**: You can check your terminal/command prompt to see if any uploads have completed. Larger files will take longer.  
+> :warning: **GUI will freeze during file upload**: You can check your terminal/command prompt to see if any uploads have completed. 
+
+> :warning: **Large files will take much longer to upload.**
 
 Windows, OSX, Linux:
 
