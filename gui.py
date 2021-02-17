@@ -12,8 +12,8 @@ def uploadaction(event=None):
     if filename:
         print('got file, sending to archive handler')
         print(filename)
-        messagebox.showinfo(title="Spore",
-                            message="The GUI will not work while uploading, please refer to the CLI for output")
+        # messagebox.showinfo(title="Spore",
+        #                     message="The GUI will not work while uploading, please refer to the CLI for output")
         archive.process(filename)
     else:
         messagebox.showinfo(title="Spore", message="You did not select a File/Folder")
