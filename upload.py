@@ -1,23 +1,25 @@
 import json
-import requests
+from requests import Session
 from requests_toolbelt.multipart import encoder
 import gui
+from threading import Thread
 
 gui_state = True
+progress_state = []
 
 
 def is_gui(status):
     global gui_state
-
-    if status:
-        gui_state = True
-    elif not status:
-        gui_state = False
+    gui_state = status
 
 
 def bayfiles_upload(files):
+    """
+    Uploads to bayfiles.io
+    """
     try:
-        session = requests.Session()
+        global progress_state
+        session = Session()
         with open(files, 'rb') as f:
             form = encoder.MultipartEncoder({
                 "file": (files, f, "application/octet-stream"),
@@ -28,6 +30,7 @@ def bayfiles_upload(files):
         resp = json.loads(r.content)
         if r.status_code == 200:
             print('BayFiles Uploaded: ' + resp['data']['file']['url']['short'])
+            progress_state.append(1)
             if gui_state:
                 gui.update_links('BayFiles: ' + resp['data']['file']['url']['short'])
 
@@ -38,8 +41,12 @@ def bayfiles_upload(files):
 
 
 def anonfiles_upload(files):
+    """
+    Uploads to anonfiles.io
+    """
     try:
-        session = requests.Session()
+        global progress_state
+        session = Session()
         with open(files, 'rb') as f:
             form = encoder.MultipartEncoder({
                 "file": (files, f, "application/octet-stream"),
@@ -50,17 +57,22 @@ def anonfiles_upload(files):
         resp = json.loads(r.content)
         if r.status_code == 200:
             print('AnonFiles Uploaded: ' + resp['data']['file']['url']['short'])
+            progress_state.append(1)
             if gui_state:
                 gui.update_links('AnonFiles: ' + resp['data']['file']['url']['short'])
         else:
             print('Something else happened')
-    except Exception:
+    except Exception as e:
         print('AnonFiles did not upload')
 
 
 def gofile_upload(files):
+    """
+    Uploads to gofile.io
+    """
     try:
-        session = requests.Session()
+        global progress_state
+        session = Session()
         with open(files, 'rb') as f:
             form = encoder.MultipartEncoder({
                 "file": (files, f, "application/octet-stream"),
@@ -70,9 +82,11 @@ def gofile_upload(files):
         session.close()
         resp = json.loads(r.content)
         if r.status_code == 200:
-            print('GoFile Uploaded: ' + 'https://gofile.io/d/' + resp['data']['code'])
+            gofile_url = f'https://gofile.io/d/{resp["data"]["code"]}'
+            print(f'GoFile Uploaded: {gofile_url}')
+            progress_state.append(1)
             if gui_state:
-                gui.update_links('GoFile: ' + 'https://gofile.io/d/' + resp['data']['code'])
+                gui.update_links(f'GoFile: {gofile_url}')
         else:
             print('Something else happened')
     except Exception as e:
@@ -80,16 +94,20 @@ def gofile_upload(files):
 
 
 def push(archive_name):
+    """
+    upload the file to every supported platform
+    """
     try:
         with open(archive_name, 'rb') as archive:
             files = archive.name
             if gui_state:
                 gui.clear()
-            bayfiles_upload(files)
-            anonfiles_upload(files)
-            gofile_upload(files)
-            if gui_state:
-                gui.infobox("All Files Uploaded.")
+            # start the threads
+            Thread(target=bayfiles_upload, args=[files]).start()
+            Thread(target=anonfiles_upload, args=[files]).start()
+            Thread(target=gofile_upload, args=[files]).start()
+            # if gui_state:
+            #     gui.infobox("All Files Uploaded.")
 
     except Exception as e:
         print("Failed to Upload (all?) files")
