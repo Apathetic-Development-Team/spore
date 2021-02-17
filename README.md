@@ -24,9 +24,9 @@ Windows, OSX, Linux:
 
 You should be greeted with the below:
 
-![spore](https://i.imgur.com/4yzkKVX.png)
+![spore](images/main.png)
 
 Once you select your files and finish the upload, you can find the links in the text box:
 
-![uploaded](https://i.imgur.com/08pIfN9.png)
+![uploaded](images/main-downloaded.png)
 
