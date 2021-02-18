@@ -4,7 +4,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter.filedialog import askopenfilenames
 
-VERSION = "2.1"
+VERSION = "0.3"
 GITHUB = "https://github.com/Apathetic-Development-Team/spore"
 
 displayText = None
