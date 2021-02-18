@@ -1,6 +1,6 @@
 # Spore :microbe:
 
-In biology, a spore is a unit of sexual or asexual reproduction that may be adapted for dispersal and for survival, often for extended periods of time, in unfavourable conditions. Although with less sex, Spore is python program that seeks to provide a similar solution for resilient file uploads. The program will take your desired file(s), compress them into a single archive, rename the archive to something boring, and upload them to multiple hosts. The goal of Spore is to make it more difficult for third parties to remove your uploaded files, or even detect them in the first place as anything but a silly archive.
+In biology, a spore is a unit of sexual or asexual reproduction that may be adapted for dispersal and for survival, often for extended periods of time, in unfavourable conditions. Although with less sex, Spore is python program that seeks to provide a similar solution for resilient file uploads. The program will take your desired file(s), compress them into a single 7zip archive, rename the archive to something boring, and upload them to multiple hosts. The goal of Spore is to make it more difficult for third parties to remove your uploaded files, or even detect them in the first place as anything but a silly archive. **The 7z password is raidforums**
 
 At present three file hosts are supported: GoFile, Anonfiles, Bayfiles. 
 
