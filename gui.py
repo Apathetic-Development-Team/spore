@@ -3,8 +3,9 @@ import archive
 from tkinter import *
 from tkinter import messagebox
 from tkinter.filedialog import askopenfilenames
+from threading import Thread
 
-VERSION = "2.1"
+VERSION = "0.3"
 GITHUB = "https://github.com/Apathetic-Development-Team/spore"
 
 displayText = None
@@ -14,7 +15,8 @@ def uploadaction(event=None):
     if filename:
         print('got file, sending to archive handler')
         print(filename)
-        archive.process(filename)
+
+        Thread(target=archive.process, args=[filename]).start()
     else:
         messagebox.showinfo(title="Spore - error", message="You did not select a File/Folder")
 
